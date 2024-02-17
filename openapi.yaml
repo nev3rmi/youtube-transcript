@@ -1,0 +1,104 @@
+openapi: 3.0.1
+info:
+  title: YouTube Transcript Extractor API
+  description: Extracts transcripts from YouTube videos and provides them in a readable format.
+  version: "1.0.0"
+servers:
+  - url: https://6df2f518-6dbe-41c8-92c8-8f60cbab9d92-00-1sbsdzrs41km2.pike.replit.dev/
+paths:
+  /transcript:
+    get:
+      summary: Retrieve the transcript of a specified YouTube video.
+      operationId: getTranscript
+      tags:
+        - transcript
+        parameters:
+          - in: query
+            name: video_url
+            schema:
+              type: string
+            required: true
+            description: The full URL of the YouTube video from which to extract the transcript.
+        responses:
+          '200':
+            description: Transcript retrieved successfully.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    videoId:
+                      type: string
+                      example: "kHVkAvxkuy8"
+                    transcript:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          text:
+                            type: string
+                            example: "This is a line of the transcript."
+                          start:
+                            type: number
+                            example: 1.23
+                          duration:
+                            type: number
+                            example: 4.56
+                            '400':
+                              description: Bad request. The 'video_url' parameter is missing or invalid.
+                              content:
+                                application/json:
+                                  schema:
+                                    type: object
+                                    properties:
+                                      error:
+                                        type: string
+                                        example: "No video URL provided"
+                            '404':
+                              description: The transcript for the given video ID could not be found, or transcripts are disabled for this video.
+                              content:
+                                application/json:
+                                  schema:
+                                    type: object
+                                    properties:
+                                      error:
+                                        type: string
+                                        example: "No transcript found for the provided video ID"
+                            '500':
+                              description: Internal Server Error. An unexpected error occurred.
+                              content:
+                                application/json:
+                                  schema:
+                                    type: object
+                                    properties:
+                                      error:
+                                        type: string
+                                        example: "An internal error occurred"
+                                        components:
+                                        schemas:
+                                          TranscriptEntry:
+                                            type: object
+                                            required:
+                                              - text
+                                              - start
+                                              - duration
+                                            properties:
+                                              text:
+                                                type: string
+                                                description: The transcript text of a particular segment.
+                                              start:
+                                                type: number
+                                                format: float
+                                                description: The start time of the transcript text segment.
+                                              duration:
+                                                type: number
+                                                format: float
+                                                description: The duration of the transcript text segment.
+                                          Error:
+                                            type: object
+                                            required:
+                                              - error
+                                            properties:
+                                              error:
+                                                type: string
+                                                description: A description of the error encountered.

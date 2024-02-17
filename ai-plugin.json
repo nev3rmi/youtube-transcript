@@ -1,0 +1,17 @@
+{
+    "schema_version": "v1",
+    "name_for_human": "YouTube Transcript Extractor",
+    "name_for_model": "youtube_transcript",
+    "description_for_human": "Extract transcripts from YouTube videos. Retrieve video captions for accessibility and content analysis.",
+    "description_for_model": "Assist the user in extracting the transcript from a YouTube video. Provide captions for videos to improve accessibility and enable content analysis.",
+    "auth": {
+        "type": "none"
+    },
+    "api": {
+        "type": "openapi",
+        "url": "https://6df2f518-6dbe-41c8-92c8-8f60cbab9d92-00-1sbsdzrs41km2.pike.replit.dev/openapi.yaml"
+    },
+    "logo_url": "https://6df2f518-6dbe-41c8-92c8-8f60cbab9d92-00-1sbsdzrs41km2.pike.replit.dev/logo.png",
+    "contact_email": "support@yourdomain.com",
+    "legal_info_url": "https://6df2f518-6dbe-41c8-92c8-8f60cbab9d92-00-1sbsdzrs41km2.pike.replit.dev/legal"
+}
